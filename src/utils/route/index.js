@@ -4,6 +4,7 @@ export { default as getMenuMatchKeys } from './getMenuMatchKeys';
 export { default as getSelectedMenuKeys } from './getSelectedMenuKeys';
 export { default as menuFormatter } from './menuFormatter';
 export { default as formatRoutes } from './formatRoutes';
+export { default as getRouteBreadcrumb } from './getRouteBreadcrumb';
 export { default as getRoute } from './getRoute';
 export { default as getRoutesByGroup } from './getRoutesByGroup';
 export { default as flatRoutes } from './flatRoutes';

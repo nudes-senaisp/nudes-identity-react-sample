@@ -1,4 +1,4 @@
-import { flatRoutes } from '.';
+import flatRoutes from './flatRoutes';
 
 const getRoutesByGroup = (routes, groupKey) =>
   flatRoutes(routes).filter((route) => route.groupKey === groupKey);

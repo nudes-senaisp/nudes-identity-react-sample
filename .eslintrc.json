@@ -32,10 +32,7 @@
     "import/no-unresolved": "off",
     "import/no-webpack-loader-syntax": 0,
     "import/prefer-default-export": 0,
-    "import/extensions": [{
-      "js": "never",
-      "jsx": "never"
-    }],
+    "import/extensions": 0,
     "jsx-a11y/aria-props": 2,
     "jsx-a11y/heading-has-content": 0,
     "jsx-a11y/label-has-for": 2,

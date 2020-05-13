@@ -27,6 +27,10 @@ const PublicLayout = (props) => {
   } = props;
 
   const menuRoutes = getRoutesByGroup(routes, 'public');
+  menuRoutes.push({
+    key: 'login',
+  });
+
   const menuKeys = menuRoutes.map((route) => route.path);
 
   const selectedMenuKeys = getSelectedMenuKeys(menuKeys, pathname);
@@ -36,7 +40,7 @@ const PublicLayout = (props) => {
   };
 
   const menuItems = menuRoutes.map((route) => {
-    const className = route.path === '/login' && !isMobile ? 'menu-login' : '';
+    const className = route.key === 'login' && !isMobile ? 'menu-login' : '';
     const link = route.key === 'home' ? '/' : route.path;
     const logged = user !== null && !isLoadingUser;
 

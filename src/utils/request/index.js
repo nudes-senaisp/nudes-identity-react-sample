@@ -3,6 +3,8 @@ import axios from 'axios';
 import axiosInstance from './axios';
 import defaultRequestHandlers from './requestHandlers';
 
+import userManager from '@/state/userManager';
+
 /**
  * Sends GET request to the specified URL.
  *
@@ -74,24 +76,25 @@ const {
  * @param {Object} requestParams.contentType Content-Type of the request. Defaults to 'application-json'.
  * @param {Object} requestParams.authorization Authorization header of the request. Defaults to the token stored in the localStorage.
  */
-export const request = (
+export const request = async (
   url,
   {
     successHandler = defaultRequestHandlers.success,
     errorHandler = defaultRequestHandlers.error,
     contentType = 'application/json',
-    authorization = localStorage.getItem('token'),
     ...customOptions
   },
 ) => {
+  const user = await userManager.getUser();
+
   const headers = {};
 
   if (contentType) {
     headers['Content-Type'] = contentType;
   }
 
-  if (authorization) {
-    headers['Authorization'] = `Bearer ${authorization}`; // eslint-disable-line
+  if (user) {
+    headers['Authorization'] = `Bearer ${user.access_token}`; // eslint-disable-line
   }
 
   const options = {

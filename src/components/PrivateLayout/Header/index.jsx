@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Dropdown, Avatar } from 'antd';
 import {
@@ -8,12 +9,13 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 
-import './style.less';
-
 import { useWindowSize } from '@/hooks';
 
-import PrivateLayoutUserDropdownMenu from '../UserDropdownMenu';
 import userManager from '@/state/userManager';
+
+import PrivateLayoutUserDropdownMenu from '../UserDropdownMenu';
+
+import './style.less';
 
 const PrivateLayoutHeader = ({
   collapsed,
@@ -21,6 +23,10 @@ const PrivateLayoutHeader = ({
   setLogoutRedirecting,
 }) => {
   const { isMobile } = useWindowSize();
+
+  const profile = useSelector((state) => state.oidc?.user?.profile);
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleMenuClick = ({ key }) => {
     switch (key) {
@@ -31,6 +37,10 @@ const PrivateLayoutHeader = ({
       default:
         break;
     }
+  };
+
+  const handleVisibleChange = (flag) => {
+    setDropdownVisible(flag);
   };
 
   return (
@@ -47,13 +57,15 @@ const PrivateLayoutHeader = ({
       <div className="right">
         <Dropdown
           trigger={['click']}
+          visible={dropdownVisible}
+          onVisibleChange={handleVisibleChange}
           overlay={
             <PrivateLayoutUserDropdownMenu onMenuClick={handleMenuClick} />
           }
         >
           <span className="action account">
             <Avatar size="small" className="avatar" icon={<UserOutlined />} />
-            <span className="name">User</span>
+            <span className="name">{profile && profile.name}</span>
           </span>
         </Dropdown>
       </div>
@@ -62,9 +74,10 @@ const PrivateLayoutHeader = ({
 };
 
 PrivateLayoutHeader.propTypes = {
-  history: PropTypes.object.isRequired,
   collapsed: PropTypes.bool.isRequired,
   onCollapse: PropTypes.func.isRequired,
+
+  setLogoutRedirecting: PropTypes.func.isRequired,
 };
 
 export default withRouter(PrivateLayoutHeader);

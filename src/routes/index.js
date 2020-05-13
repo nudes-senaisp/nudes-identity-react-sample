@@ -5,7 +5,6 @@ import { UserOutlined } from '@ant-design/icons';
 import formatRoutes from '@/utils/route/formatRoutes';
 
 import HomePage from '@/pages/HomePage';
-import Login from '@/pages/LoginPage';
 import LoginCallbackPage from '@/pages/LoginCallbackPage';
 import ProfilePage from '@/pages/ProfilePage';
 
@@ -16,12 +15,6 @@ const routes = [
     exact: true,
     component: HomePage,
     name: 'Home',
-  },
-  {
-    key: 'login',
-    groupKey: 'public',
-    component: Login,
-    name: 'Login',
   },
   {
     key: 'app',
