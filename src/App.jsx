@@ -8,6 +8,8 @@ import PublicLayout from './layouts/PublicLayout';
 import PrivateLayout from './layouts/PrivateLayout';
 import { getRoute, getRoutesByGroup } from './utils/route';
 
+import './assets/styles/global.less';
+
 const App = () => {
   const app = getRoute(routes, 'app');
   const publicRoutes = getRoutesByGroup(routes, 'public');
